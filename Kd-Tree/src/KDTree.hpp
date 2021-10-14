@@ -249,7 +249,7 @@ ElemType KDTree<N, ElemType>::knn_value(const Point<N> &key, size_t k) const {
   knn_query(t,key,k, pQueue,0);
   sort(pQueue.begin(),pQueue.end());
   vector<ElemType> knn_values;
-  for(long long i=0;i<k;i++){
+  for(long long i=0;i<k && i<pQueue.size();i++){
     pair<double,KDTreeNode<N,ElemType>*> t=pQueue[i];
     KDTreeNode<N,ElemType>* a=t.second;
     knn_values.push_back(a->value);
@@ -266,7 +266,7 @@ ElemType KDTree<N, ElemType>::knn_value(const Point<N> &key, size_t k) const {
       m=knn_values[i];
     } 
   }
-  cout<<m<<endl;
+  pQueue.clear();
   return m;
 }
 
